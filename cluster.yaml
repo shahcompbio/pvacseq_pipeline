@@ -1,0 +1,8 @@
+__default__:
+    time: "96:00"
+    nCPUS: 8
+    memory: 40
+    name: "JOBNAME.{rule}.{wildcards}"
+    output: "{config[log_dir]}/{rule}.{wildcards}.out"
+    resources: "\"span[hosts=1]\""
+

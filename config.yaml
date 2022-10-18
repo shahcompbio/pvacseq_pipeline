@@ -1,0 +1,42 @@
+log_dir: /juno/work/shah/users/chois7/apollo/neoantigen/cluster_log
+reference_fasta: /juno/work/shah/isabl_data_lake/assemblies/GRCh37/GRCh37-lite/GRCh37-lite.fa
+
+test_mode: False
+test_R1: /juno/work/shah/users/chois7/apollo/neoantigen/pipeline/test/data/test_R1_001.fastq.gz
+test_R2: /juno/work/shah/users/chois7/apollo/neoantigen/pipeline/test/data/test_R2_001.fastq.gz
+
+cohort_file: /juno/work/shah/users/chois7/apollo/neoantigen/n69/cohort.tsv
+
+known_snp_sites: /juno/work/shah/reference/databases/dbsnp_b146_GRCh37p13.vcf.gz
+tmp_dir: /juno/work/shah/users/chois7/apollo/neoantigen/tmp_dir
+
+gtf: /work/shah/reference/kallisto_references/homo_sapiens/Homo_sapiens.GRCh38.96.gtf 
+
+hla:
+  # Optitype parameters
+  optitype:
+    perc_indent: 95
+    max_hits: 1
+    dist_range: 0
+    hla_ref: /juno/work/shah/vazquezi/projects/spectrum/resources/references/optitype/hla_reference_dna.fasta
+
+vep:
+    fasta: /rtsess01/juno/home/chois7/.vep/homo_sapiens/98_GRCh37/Homo_sapiens.GRCh37.75.dna.primary_assembly.fa.gz
+    run_file: /rtsess01/juno/home/chois7/chois7/packages/ensembl-vep-release-98.3/vep
+    plugins_dir: /rtsess01/juno/home/chois7/.vep/Plugins
+    cache_dir: /rtsess01/juno/home/chois7/.vep
+
+gatk:
+    interval: 6:27350704-32473203
+
+pvacseq:
+    mem_mb: 12000
+    disk_mb: 4000
+
+# Output suffixes
+outputs:
+  out: outputs
+  log: logs
+  bench: benchmarks
+  work: scratch
+
