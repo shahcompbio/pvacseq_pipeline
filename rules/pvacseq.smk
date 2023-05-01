@@ -56,7 +56,7 @@ rule get_hla_reads:
         hla_bam='main_run/{patient}/{sample}/outputs/get_hla_reads/hla.bam',
         hla_bai='main_run/{patient}/{sample}/outputs/get_hla_reads/hla.bam.bai',
     params:
-        intervals=config['gatk']['interval'],
+        interval=config['gatk']['interval'],
         gatk_hla_bai='main_run/{patient}/{sample}/outputs/get_hla_reads/hla.bai',
     singularity:
         'docker://broadinstitute/gatk',
@@ -139,6 +139,8 @@ rule optitype:
     output: # main_run/A002/ADT002/outputs/optitype/sample/sample_coverage_plot.pdf
         coverage='main_run/{patient}/{sample}/outputs/optitype/sample/sample_coverage_plot.pdf',
         hla='main_run/{patient}/{sample}/outputs/optitype/sample/sample_result.tsv',
+    params:
+        outdir='main_run/{patient}/{sample}/outputs/optitype/sample'
     singularity:
         "docker://fred2/optitype",
     shell:
@@ -154,6 +156,8 @@ rule maf_to_vcf:
         ref=config['reference_fasta'],
     output:
         vcf='main_run/{patient}/{sample}/outputs/pvacseq_input/consensus.vcf',
+    params:
+        outdir='main_run/{patient}/{sample}/outputs/pvacseq_input', #
     singularity:
         '/juno/work/shah/mondrian/singularity/variant_v0.0.26.sif', # contains maf2vcf.pl
     shell:
@@ -180,8 +184,8 @@ rule vep:
         '--fasta {input.ref} ' 
         '--offline --cache ' 
         '--plugin Frameshift --plugin Wildtype ' 
-        '--dir_plugins {params.plugins_dir} '
-        '--dir_cache {params.cache_dir} '
+        '--dir_plugins {params.vep_plugins_dir} '
+        '--dir_cache {params.vep_cache_dir} '
         '--force_overwrite'
 
 rule vt_decompose:
